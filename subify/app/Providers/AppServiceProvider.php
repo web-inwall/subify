@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\RateLimiter::for('recurring_payments', function ($job) {
+            return \Illuminate\Cache\RateLimiting\Limit::perMinute(10);
+        });
     }
 }
